@@ -16,12 +16,16 @@ class Menu extends Component {
         if(staffs == null){
             console.log("null");
             return(
-                <div></div>
+                <div>
+                    <p>Bấm vào tên nhân viên để xem thông tin</p>
+                </div>
             )
         }
         else{
             console.log(staffs);
             return(
+                <div className='row thongtinnhavien'>
+                <div className="col-12 col-md-3">
                 <Card>
                     <CardImg width="100%" src = {staffs.image} alt={staffs.name}/>
                     <CardBody>
@@ -29,6 +33,8 @@ class Menu extends Component {
                         <CardText></CardText>
                     </CardBody>
                 </Card>
+                </div>
+                </div>
             )
         }
     }
@@ -48,13 +54,8 @@ class Menu extends Component {
                 <div className="row">
                         {menu}
                 </div>
-                <div className='row'>
-                    <div className="col-12 col-md-3">
-                        {this.rendernhanvien(this.state.selected_nhanvien)}
-                    </div>
-                
+                    {this.rendernhanvien(this.state.selected_nhanvien)}
                 </div>
-            </div>
          );
      }
 }
