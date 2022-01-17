@@ -40,7 +40,7 @@ class Menu extends Component {
     }
      render(){
          const menu = this.props.nhanvien.map((staffs)=>{
-             return( <div key={staffs.id} className= "col-12 col-md-3">
+             return( <div key={staffs.id} className= "col-12 col-sm-5 col-md-3 m-1">
              <Card onClick={()=>this.onnvSelect(staffs)}>
                  
                      <CardTitle>{staffs.name}</CardTitle>
