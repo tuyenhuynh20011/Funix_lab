@@ -36,11 +36,10 @@ class Menu extends Component {
          const menu = this.props.nhanvien.map((staffs)=>{
              return( <div key={staffs.id} className= "col-12 col-md-3">
              <Card onClick={()=>this.onnvSelect(staffs)}>
-                <CardImg width="100%" src = {staffs.image} alt={staffs.name}/>
-                 <CardImgOverlay >
+                 
                      <CardTitle>{staffs.name}</CardTitle>
                      {/*<CardText>{dish.description}</CardText>*/}
-                 </CardImgOverlay>
+                
              </Card>
          </div>);   
          });
@@ -50,7 +49,7 @@ class Menu extends Component {
                         {menu}
                 </div>
                 <div className='row'>
-                    <div className="col-12 col-md-4">
+                    <div className="col-12 col-md-3">
                         {this.rendernhanvien(this.state.selected_nhanvien)}
                     </div>
                 
