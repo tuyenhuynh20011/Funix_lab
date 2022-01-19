@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle, Input} from 'reactstrap';
-import dateFormat, { masks } from "dateformat";
+import {Card,CardText, CardBody, CardTitle} from 'reactstrap';
+import dateFormat from "dateformat";
+
+
 class Menu extends Component {
      constructor(props){
          super(props);
@@ -49,12 +51,12 @@ class Menu extends Component {
              return(
             <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
              <Card onClick={()=>this.onnvSelect(staffs)}>
-                 
                      <CardTitle>{staffs.name}</CardTitle>
-                     {/*<CardText>{dish.description}</CardText>*/}
-                
+                     {/*<CardText>{dish.description}</CardText>*/}    
              </Card>
-         </div>);   
+         </div>
+         );
+
          });
          return (
             <div className="container">
@@ -67,3 +69,5 @@ class Menu extends Component {
      }
 }
 export default Menu;
+
+  

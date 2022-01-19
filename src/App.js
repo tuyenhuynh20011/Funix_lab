@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import { Navbar,NavbarBrand} from 'reactstrap';
 import Menu from './components/MenuComponent';
+import NameForm from './components/formcoponent'
 import './App.css';
 import {DEPARTMENTS, ROLE, STAFFS} from './shared/staffs';
 
@@ -24,6 +25,7 @@ class App extends Component{
             </div>
           </Navbar>
           <Menu nhanvien = {this.state.staffs}/>
+          <NameForm></NameForm>
       </div>
     );
 
