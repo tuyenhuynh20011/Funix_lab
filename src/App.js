@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
-import { Navbar,NavbarBrand } from 'reactstrap';
+import { Navbar,NavbarBrand} from 'reactstrap';
 import Menu from './components/MenuComponent';
 import './App.css';
 import {DEPARTMENTS, ROLE, STAFFS} from './shared/staffs';
@@ -10,7 +10,6 @@ class App extends Component{
     super(props);
     this.state = {
       staffs : STAFFS
-      
     };
   console.log(props);
   }

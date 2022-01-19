@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle, Input} from 'reactstrap';
 import dateFormat, { masks } from "dateformat";
 class Menu extends Component {
      constructor(props){
@@ -26,7 +26,7 @@ class Menu extends Component {
             console.log(staffs);
             return(
                 <div className='row thongtinnhavien'>
-                <div className="col-12 col-sm-5 col-md-3">
+                <div className="col-12 col-sm-10 col-md-4">
                 <Card>
                     {/*<CardImg width="100%" src = {staffs.image} alt={staffs.name}/>*/}
                     <CardBody>
@@ -46,7 +46,8 @@ class Menu extends Component {
     }
      render(){
          const menu = this.props.nhanvien.map((staffs)=>{
-             return( <div key={staffs.id} className= "col-12 col-sm-5 col-md-3 m-1">
+             return(
+            <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
              <Card onClick={()=>this.onnvSelect(staffs)}>
                  
                      <CardTitle>{staffs.name}</CardTitle>
