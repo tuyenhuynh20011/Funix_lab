@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Card,CardText, CardBody, CardTitle} from 'reactstrap';
 import dateFormat from "dateformat";
-
-
 class Menu extends Component {
      constructor(props){
          super(props);
@@ -12,12 +10,10 @@ class Menu extends Component {
      }
      onnvSelect(staffs) {
         this.setState({ selected_nhanvien:staffs});
-        console.log(staffs);
+        
     };
-    rendernhanvien(staffs){
-        console.log("ckick");
-        if(staffs == null){
-            console.log("null");
+    rendernhanvien(a){
+        if(a == null){
             return(
                 <div>
                     <p>Bấm vào tên nhân viên để xem thông tin</p>
@@ -25,19 +21,18 @@ class Menu extends Component {
             )
         }
         else{
-            console.log(staffs);
             return(
                 <div className='row thongtinnhavien'>
                 <div className="col-12 col-sm-10 col-md-4">
                 <Card>
                     {/*<CardImg width="100%" src = {staffs.image} alt={staffs.name}/>*/}
                     <CardBody>
-                        <h6> Họ và tên: {staffs.name}</h6>
-                        <p>Ngày sinh: {dateFormat(staffs.doB, "dd/mm/yyyy")}</p>
-                        <p>Ngày vào công ty: {dateFormat(staffs.startDate, "dd/mm/yyyy")}</p>
-                        <p>Phòng ban: {staffs.department.name}</p>
-                        <p>Số ngày nghỉ còn lại:{staffs.annualLeave}</p>
-                        <p>Số ngày đã làm thêm:{staffs.overTime}</p>
+                        <h6> Họ và tên: {a.name}</h6>
+                        <p>Ngày sinh: {dateFormat(a.doB, "dd/mm/yyyy")}</p>
+                        <p>Ngày vào công ty: {dateFormat(a.startDate, "dd/mm/yyyy")}</p>
+                        <p>Phòng ban: {a.department.name}</p>
+                        <p>Số ngày nghỉ còn lại:{a.annualLeave}</p>
+                        <p>Số ngày đã làm thêm:{a.overTime}</p>
                         <CardText></CardText>
                     </CardBody>
                 </Card>
@@ -45,18 +40,37 @@ class Menu extends Component {
                 </div>
             )
         }
-    }
+    };
      render(){
          const menu = this.props.nhanvien.map((staffs)=>{
-             return(
-            <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
+            if (this.state.selected_nhanvien!=null){
+                if(this.state.selected_nhanvien.id ==staffs.id){
+                    return(
+                        <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
+                         <Card onClick={()=>this.onnvSelect(staffs)}>
+                                 <CardTitle style ={{color:'red'}}>{staffs.name}</CardTitle>
+                                 {/*<CardText>{dish.description}</CardText>*/}    
+                         </Card>
+                     </div>
+                     )}
+                else{
+                    return(
+                        <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
+                         <Card onClick={()=>this.onnvSelect(staffs)}>
+                                 <CardTitle>{staffs.name}</CardTitle>
+                                 {/*<CardText>{dish.description}</CardText>*/}    
+                         </Card>
+                     </div>
+                     )}
+
+                }
+         else{
+             return( <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
              <Card onClick={()=>this.onnvSelect(staffs)}>
                      <CardTitle>{staffs.name}</CardTitle>
                      {/*<CardText>{dish.description}</CardText>*/}    
              </Card>
-         </div>
-         );
-
+         </div>);}
          });
          return (
             <div className="container">

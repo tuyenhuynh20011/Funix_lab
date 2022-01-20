@@ -4,7 +4,7 @@ import { Navbar,NavbarBrand} from 'reactstrap';
 import Menu from './components/MenuComponent';
 import NameForm from './components/formcoponent'
 import './App.css';
-import {DEPARTMENTS, ROLE, STAFFS} from './shared/staffs';
+import {STAFFS} from './shared/staffs';
 
 class App extends Component{
   constructor(props){
