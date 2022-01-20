@@ -43,10 +43,23 @@ class Menu extends Component {
     };
      render(){
          const menu = this.props.nhanvien.map((staffs)=>{
+             console.log(this.props.socot);
+             var x;
+             if (this.props.socot ==3){
+               x  = "col-12 col-sm-5 col-md-4 menunhanvien";
+             }
+                
+            else if (this.props.socot ==1)
+                x  = "col-12 col-sm-5 col-md-12 menunhanvien";
+            else if (this.props.socot==2)
+                x  = "col-12 col-sm-5 col-md-5 menunhanvien";
+            else
+                 x  = "col-12 col-sm-5 col-md-2 menunhanvien";
+                 
             if (this.state.selected_nhanvien!=null){
                 if(this.state.selected_nhanvien.id ==staffs.id){
                     return(
-                        <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
+                        <div key={staffs.id} className= {x}>
                          <Card onClick={()=>this.onnvSelect(staffs)}>
                                  <CardTitle style ={{color:'red'}}>{staffs.name}</CardTitle>
                                  {/*<CardText>{dish.description}</CardText>*/}    
@@ -55,7 +68,7 @@ class Menu extends Component {
                      )}
                 else{
                     return(
-                        <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
+                        <div key={staffs.id} className= {x}>
                          <Card onClick={()=>this.onnvSelect(staffs)}>
                                  <CardTitle>{staffs.name}</CardTitle>
                                  {/*<CardText>{dish.description}</CardText>*/}    
@@ -65,7 +78,7 @@ class Menu extends Component {
 
                 }
          else{
-             return( <div key={staffs.id} className= "col-12 col-sm-5 col-md-4 menunhanvien">
+             return( <div key={staffs.id} className= {x}>
              <Card onClick={()=>this.onnvSelect(staffs)}>
                      <CardTitle>{staffs.name}</CardTitle>
                      {/*<CardText>{dish.description}</CardText>*/}    
