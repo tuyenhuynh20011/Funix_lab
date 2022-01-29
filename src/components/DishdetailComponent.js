@@ -1,34 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg, CardText, CardBody,CardTitle } from 'reactstrap';
 import dateFormat from "dateformat";
-class CommentForm extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state ={
-        }
        
-    }
-
-    render(){
-        //console.log(this.props.comment);
-        const comment = this.props.comment.map((comment1)=>{
-            return(
-                <div>
-                <p>{comment1.comment}</p>
-                <p>{"-- "+comment1.author+ ", "+dateFormat(comment1.date,"dd/mm/yyyy")}</p>
-                </div>
-            )
-        });
+ function CommentForm ({comment}){
+    const comment1 = comment.map((comment1)=>{
         return(
-            <div className="col-12 col-md-5 m-1">
-                <h4 style={{textAlign: "left"}}>Comments</h4>
-                        {comment}
+            <div>
+            <p>{comment1.comment}</p>
+            <p>{"-- "+comment1.author+ ", "+dateFormat(comment1.date,"dd/mm/yyyy")}</p>
             </div>
         )
-    }
-
-} 
+    });
+    return(
+        <div className="col-12 col-md-5 m-1">
+            <h4 style={{textAlign: "left"}}>Comments</h4>
+                    {comment1}
+        </div>
+    )
+}
+ 
 const DishDetail = (props) => {
     if (props.dish != null)
     return(
@@ -43,7 +34,7 @@ const DishDetail = (props) => {
                     </CardBody>
                 </Card>
                 </div>
-                <CommentForm comment = {props.dish.comments}></CommentForm>
+                <CommentForm comment = {props.dish.comments}/>
         </div>
         </div>
     );
