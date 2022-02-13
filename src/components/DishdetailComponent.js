@@ -39,7 +39,7 @@ const DishDetail = (props) => {
                 <Card>
                     <CardImg top src={props.staff.image} alt={props.staff.name} />
                     <CardBody>
-                        <CardTitle>{props.staff.name}</CardTitle>
+                        <CardTitle style = {{color:"black", textAlign: "center"}}>{props.staff.name}</CardTitle>
                         {/* <CardText>{props.dish.description}</CardText> */}
                     </CardBody>
                 </Card>

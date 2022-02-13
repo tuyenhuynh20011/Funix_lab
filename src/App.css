@@ -23,7 +23,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #0a0a0a;
 }
 
 @keyframes App-logo-spin {
@@ -70,4 +70,7 @@ address{
 }
 a {
  margin-left: 3pt;
+}
+CardTitle {
+  color: #000;
 }

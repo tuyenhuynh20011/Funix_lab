@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay,CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Card, CardImg,CardTitle,CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function RenderMenuItem ({staffs, onClick}) {
@@ -7,7 +7,7 @@ function RenderMenuItem ({staffs, onClick}) {
         <Card>
             <Link to={`/menu/${staffs.id}`} >
                 <CardImg width="100%" src={staffs.image} alt={staffs.name} />
-                    <CardTitle>{staffs.name}</CardTitle>
+                <CardTitle style = {{color:"black", textAlign: "center"}}>{staffs.name}</CardTitle>
             </Link>
         </Card>
     );
