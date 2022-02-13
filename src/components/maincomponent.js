@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Menu from './MenuComponent';
 import {DISHES} from '../shared/dishes';
+import {STAFFS} from '../shared/staffs';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent.js';
 import Home from './HomeComponent';
@@ -18,37 +19,37 @@ class Main extends Component{
       dishes: DISHES,
       comments: COMMENTS,
       promotions: PROMOTIONS,
-      leaders: LEADERS
+      leaders: LEADERS,
+      staffs: STAFFS,
     };  
     
   }
   
   render(){
-    const HomePage = () => {
+    
+    const staffsWithId = ({match}) => {
+      console.log(parseInt(match.params.staffsId,10));
+      if (this.state.staffs.length >parseInt(match.params.staffsId,10)){
       return(
-          <Home 
-              dish={this.state.dishes.filter((dish) => dish.featured)[0]}
-              promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
-              leader={this.state.leaders.filter((leader) => leader.featured)[0]}
-          />
+          <DishDetail staff={this.state.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0]} 
+             />
       );
-    }
-    const DishWithId = ({match}) => {
-      return(
-          <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
-            comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
-      );
+      }
+      else{
+        return(
+          <h3>lỗi</h3>
+        )
+      }
     };
   
     return (
       <div className="App">
           <Header/>
           <Switch>
-              <Route path='/home' component={HomePage} />
-              <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
-              <Route path='/menu/:dishId' component={DishWithId} />
+              <Route exact path='/menu' component={() => <Menu staffs={this.state.staffs} />} />
+              <Route path='/menu/:staffsId' component={staffsWithId} />
               <Route exact path='/contactus' component={Contact}/>
-              <Redirect to="/home" />
+              <Redirect to="/menu" />
           </Switch>
            <Footer/>
       </div>

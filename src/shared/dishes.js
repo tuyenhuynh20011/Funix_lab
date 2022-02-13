@@ -39,5 +39,35 @@ export const DISHES =
         price:'2.99',
         featured: false,
         description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
-        }
+        },
+        {
+            id: 4,
+            name:'Uthappizza',
+            image: '/assets/images/uthappizza.png',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            featured: true,
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'                    
+            },
+            {
+                id: 4,
+                name:'Uthappizza',
+                image: '/assets/images/uthappizza.png',
+                category: 'mains',
+                label:'Hot',
+                price:'4.99',
+                featured: true,
+                description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'                    
+                },
+                {
+                    id: 4,
+                    name:'Uthappizza',
+                    image: '/assets/images/uthappizza.png',
+                    category: 'mains',
+                    label:'Hot',
+                    price:'4.99',
+                    featured: true,
+                    description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'                    
+                    },
     ];

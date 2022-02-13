@@ -68,3 +68,6 @@ address{
 .navbar-dark {
   background-color: #512DA8;
 }
+a {
+ margin-left: 3pt;
+}
