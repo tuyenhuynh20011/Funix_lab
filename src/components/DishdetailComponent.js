@@ -2,26 +2,6 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody,CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import dateFormat from "dateformat";
-import {DEPARTMENTS} from '../shared/staffs';
-
-       
-//  function CommentForm ({comment}){
-//     const comment1 = comment.map((comment1)=>{
-//         return(
-//             <div>
-//             <p>{comment1.comment}</p>
-//             <p>{"-- "+comment1.author+ ", "+dateFormat(comment1.date,"dd/mm/yyyy")}</p>
-//             </div>
-//         )
-//     });
-//     return(
-//         <div className="col-12 col-md-5 m-1">
-//             <h4 style={{textAlign: "left"}}>Comments</h4>
-//                     {comment1}
-//         </div>
-//     )
-// }
- 
 const DishDetail = (props) => {
     return(
         <div className="container">
