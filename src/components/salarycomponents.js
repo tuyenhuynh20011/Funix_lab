@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card,CardTitle,CardText,Breadcrumb,BreadcrumbItem} from 'reactstrap';
-import {DEPARTMENTS} from '../shared/staffs'
 import { Link } from 'react-router-dom';
 
 function tinh_luong(staff){
@@ -16,7 +15,7 @@ function Render_Item({staff}){
             <CardText>Mã nhân viên:&nbsp; {staff.id}</CardText>
             <CardText>Hệ số lương:&nbsp; {staff.salaryScale}</CardText>
             <CardText>Số giờ làm thêm:&nbsp; {staff.overTime}</CardText>
-            <CardText style ={{backgroundColor:"#868686",height :"30px"}}>&nbsp;Lương:&nbsp;{tinh_luong(staff).toFixed()} </CardText>
+            <CardText style ={{backgroundColor:"#1e7e34",height :"30px", color:"#FFFFFF"}}>&nbsp;Lương:&nbsp;{tinh_luong(staff).toFixed()} </CardText>
         </Card>
     )
 
@@ -42,7 +41,6 @@ else{
 }
 
 const Salary= (props)=>{
-    
     const listItem = props.staffs.map((staff) => {
         return (
             <div  className="col-12 col-md-6 col-lg-4">
@@ -50,20 +48,26 @@ const Salary= (props)=>{
             </div>
           );
       })
-      return(
-        <div className="container">
+      if(props.staffs.length===0){
+        return(
+            <div></div>
+        )
+       }
+       else{
+        return(
+            <div className="container">
+                <div className="row">
+                        <Breadcrumb1 allItem={props.allItem} id = {props.id}/>
+                        <div className="col-12">
+                            <hr />
+                        </div>                
+                    </div> 
             <div className="row">
-                    <Breadcrumb1 allItem={props.allItem} id = {props.id}/>
-                    <div className="col-12">
-                        <hr />
-                    </div>                
-                </div> 
-        <div className="row">
-            {listItem}
-        </div>
-        </div>
-
-      )
+                {listItem}
+            </div>
+            </div>
+        )
+       }
 }
 
 

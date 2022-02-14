@@ -21,11 +21,7 @@ const Department= (props)=>{
     });
     return (
         <div className="container">
-            <div className="row">
-                <div className="col-12">
-                    <h4>Phòng ban</h4>
-                    <hr />
-                </div>                
+            <div className="row">                
             </div>
             <div className="row">
                 {menu}
