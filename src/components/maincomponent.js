@@ -6,6 +6,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent.js';
 import DishDetail from './DishdetailComponent';
 import Department from './departmentcomponents';
+import Salary from './salarycomponents';
 import { Switch, Route, Redirect } from 'react-router-dom';
 class Main extends Component{
   constructor(props) {
@@ -32,6 +33,13 @@ class Main extends Component{
         )
       }
     };
+    const DepartmentwId = ({match}) => {
+      return(
+          <Salary staffs={this.state.staffs.filter((staffs) => staffs.department.name === match.params.departmentId)}
+            allItem ={0} id = {match.params.departmentId}
+             />
+      );
+      }
   
     return (
       <div className="App">
@@ -40,6 +48,8 @@ class Main extends Component{
               <Route exact path='/menu' component={() => <Menu staffs={this.state.staffs} />} />
               <Route path='/menu/:staffsId' component={staffsWithId} />
               <Route exact path='/department' component={() => <Department department={this.state.department}/> }/>
+              <Route path='/department/:departmentId' component={DepartmentwId} />
+              <Route exact path='/salary' component={() => <Salary staffs={this.state.staffs} allItem ={1}/>} />
               <Redirect to="/menu" />
           </Switch>
            <Footer/>
