@@ -20,13 +20,24 @@ class Menu extends Component{
         this.state={
             staffs :this.props.staffs,
             name:'',
+            username:'',
+            doB:'2000-01-01',
+            salaryScale:1,
+            startDate:'2022-01-01',
+            department:'Sale',
+            annualLeave: 0,
+            overTime: 0
         }
         this.handleSearch=this.handleSearch.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.handleAddstaff=this.handleAddstaff.bind(this);
     }
 
-    
+    handleAddstaff(event){
+        event.preventDefault();
+        console.log(this.state);
+    }
     handleSearch(event){
         event.preventDefault();
         const result = this.props.staffs.filter(s => s.name.toLowerCase().match(this.state.name.toLowerCase()));
@@ -39,7 +50,7 @@ class Menu extends Component{
     }
     handleInputChange(event){
         this.setState({
-            name: event.target.value
+            [event.target.name]: event.target.value
         });
     }
     toggleModal(){
@@ -47,7 +58,6 @@ class Menu extends Component{
             isModalOpen: !this.state.isModalOpen
           });
     }
-
     render(){
         const menu = this.state.staffs.map((staffs) => {
             return (
@@ -91,14 +101,16 @@ class Menu extends Component{
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Thêm nhân viên</ModalHeader>
                         <ModalBody>
-                    <Form onSubmit={this.handleLogin}>
+                    <Form onSubmit={this.handleAddstaff}>
                         <div className="form-group row">
                             <Col className="col-4">
                                 <Label  htmlFor="username">Tên</Label>
                             </Col>
                             <Col className="col-8">
                                 <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
+                                    placeholder ="Lã Ngọc Quang"
+                                    value={this.state.username}
+                                    onChange={this.handleInputChange} />
                             </Col>
                         </div>
 
@@ -108,7 +120,8 @@ class Menu extends Component{
                             </Col>
                             <Col className="col-8">
                                 <Input type="date" id="doB" name="doB"
-                                    innerRef={(input) => this.doB = input}  />
+                                      value={this.state.doB}
+                                      onChange={this.handleInputChange} />
                             </Col>
                         </div>
                         <div className="form-group row">
@@ -117,7 +130,25 @@ class Menu extends Component{
                             </Col>
                             <Col className="col-8">
                                 <Input type="date" id="startDate" name="startDate"
-                                    innerRef={(input) => this.startDate = input}  />
+                                    value={this.state.startDate}
+                                    onChange={this.handleInputChange}   />
+                            </Col>
+                        </div>
+                        <div className="form-group row">
+                            <Col className="col-4">
+                            <Label htmlFor="department">Phòng ban</Label>
+                            </Col>
+                            <Col className="col-8">
+
+                                <Input type="select" id="department" name="department"
+                                    value={this.state.department}
+                                    onChange={this.handleInputChange} 
+                                    ><option>Sale</option>
+                                    <option>HR</option>
+                                    <option>Marketing</option>
+                                    <option>IT</option>
+                                    <option>Finance</option>
+                                    </Input>
                             </Col>
                         </div>
                         <div className="form-group row">
@@ -126,7 +157,9 @@ class Menu extends Component{
                             </Col>
                             <Col className="col-8">
                                 <Input type="text" id="salaryScale" name="salaryScale"
-                                    innerRef={(input) => this.salaryScale = input}  />
+                                    placeholder ="1->3"
+                                    value={this.state.salaryScale}
+                                    onChange={this.handleInputChange} />
                             </Col>
                         </div>
                         <div className="form-group row">
@@ -135,7 +168,8 @@ class Menu extends Component{
                             </Col>
                             <Col className="col-8">
                                 <Input type="text" id="annualLeave" name="annualLeave"
-                                    innerRef={(input) => this.annualLeave = input}  />
+                                    value={this.state.annualLeave}
+                                    onChange={this.handleInputChange}  />
                             </Col>
                         </div>
                         <div className="form-group row">
@@ -144,7 +178,8 @@ class Menu extends Component{
                             </Col>
                             <Col className="col-8">
                                 <Input type="text" id="overTime" name="overTime"
-                                    innerRef={(input) => this.overTime = input}  />
+                                    value={this.state.overTime}
+                                    onChange={this.handleInputChange}  />
                             </Col>
                         </div> 
                         <div class="form-group row">
