@@ -118,8 +118,7 @@ class Menu extends Component{
         };
         const errors= this.validate(this.state.username, this.state.salaryScale, this.state.annualLeave, this.state.overTime);
         if (this.state.touched.username===true){
-            if(errors.username ===''&& errors.salaryScale ===''&& errors.annualLeave ===''&& 
-                errors.overTime ===''&& errors.startDate ===''){
+            if(errors.username ===''&& errors.salaryScale ===''&& errors.annualLeave ===''&& errors.overTime ===''&& errors.startDate ===''){
                 this.props.parentCallback(newStaff);
                 this.setState({
                     isModalOpen:false,

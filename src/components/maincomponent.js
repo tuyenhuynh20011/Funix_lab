@@ -21,6 +21,20 @@ class Main extends Component{
     const newList = this.state.staffs;
     const id = this.state.staffs.length;
     childData.id = id;
+    
+
+    if (childData.department ==='Sale')
+      childData.department = this.state.department[0];
+    else if (childData.department ==='HR')
+      childData.department = this.state.department[1];
+
+    else if (childData.department ==='Marketing')
+      childData.department = this.state.department[2];
+    else if(childData.department ==='IT')
+      childData.department = this.state.department[3];
+    else 
+      childData.department = this.state.department[4];
+    
     newList.push(childData);
     this.setState({
       staffs: newList
