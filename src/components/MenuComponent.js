@@ -167,7 +167,7 @@ class Menu extends Component{
                                 <Form onSubmit={this.handleSearch}>
                                     <Row className="form-group">
                                         <Col md={{size: 6, offset: 2}}  style={{marginTop:"10px"}}>
-                                            <Input type="text" id="key_" name="key_" 
+                                            <Input type="text" id="name" name="name" 
                                             innerRef={(input) => this.name = input}
                                             onChange ={this.handleInputChange} />
                                         </Col>
