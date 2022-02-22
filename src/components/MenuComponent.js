@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { Card, CardImg,CardTitle,Button,Input, Form, Row,Col, Modal, ModalHeader, ModalBody,Label,FormFeedback} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
- function RenderMenuItem ({staffs},{keyWord}) {
+ function RenderMenuItem ({staffs}) {
 
         return (
             <Card>
@@ -39,15 +39,9 @@ class Menu extends Component{
         this.handleSearch=this.handleSearch.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        this.handleAddstaff=this.handleAddstaff.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.validate = this.validate.bind(this);
         this.addNhanvien = this.addNhanvien.bind(this);
-    }
-
-    handleAddstaff(event){
-        event.preventDefault();
-        console.log(this.state);
     }
     handleSearch(event){
         event.preventDefault();
@@ -73,13 +67,16 @@ class Menu extends Component{
             touched: { ...this.state.touched, [field]: true }
         });
     }
-    validate(username, salaryScale, annualLeave, overTime) {
+    validate(username, salaryScale, annualLeave, overTime,doB,startDate) {
         const errors = {
             username: '',
             salaryScale:'',
             annualLeave:'',
             overTime:'',
+            startDate:'',
         };
+        if(startDate<=doB)
+            errors.startDate ='ngày vào công ty phải sau ngày sinh';
 
         if (this.state.touched.username && username.length < 3)
             errors.username = 'Tên ít nhất 3 kí tự';
@@ -107,13 +104,26 @@ class Menu extends Component{
 
         return errors;
     }
-    addNhanvien(errors,event){
+    addNhanvien(event){
+        event.preventDefault();
+        const newStaff={
+            name: this.state.username,
+            salaryScale: this.state.salaryScale,
+            annualLeave: this.state.annualLeave,
+            overTime: this.state.overTime,
+            doB: this.state.doB,
+            department: this.state.department,
+            startDate : this.state.startDate,
+            image: '/assets/images/alberto.png',
+        };
+        const errors= this.validate(this.state.username, this.state.salaryScale, this.state.annualLeave, this.state.overTime);
         if (this.state.touched.username===true){
             if(errors.username ===''&& errors.salaryScale ===''&& errors.annualLeave ===''&& 
-                errors.overTime ===''){
-                console.log('Thêm nhân viên');
+                errors.overTime ===''&& errors.startDate ===''){
+                this.props.parentCallback(newStaff);
                 this.setState({
                     isModalOpen:false,
+                    username:'',
                     touched:{ 
                         username: false,
                         salaryScale:false,
@@ -125,14 +135,19 @@ class Menu extends Component{
             }
         }
         else
+        this.setState({
+            touched: {
+                username:true,
+            }
+        })
             return;
     }
         render(){
-            const errors= this.validate(this.state.username, this.state.salaryScale, this.state.annualLeave, this.state.overTime);
+            const errors= this.validate(this.state.username, this.state.salaryScale, this.state.annualLeave, this.state.overTime,this.state.doB,this.state.startDate);
             const menu = this.state.staffs.map((staffs) => {
                 return (
                     <div  className="col-12 col-md-4 col-lg-2">
-                        <RenderMenuItem staffs = {staffs} keyWord ={this.state.key} />
+                        <RenderMenuItem staffs = {staffs} />
                     </div>
                 );
             });
@@ -205,8 +220,10 @@ class Menu extends Component{
                             <Col className="col-8">
                                 <Input type="date" id="startDate" name="startDate"
                                     value={this.state.startDate}
-                        
+                                    valid={errors.startDate === ''}
+                                    invalid={errors.startDate !== ''}
                                     onChange={this.handleInputChange}   />
+                                    <FormFeedback>{errors.startDate}</FormFeedback>
                             </Col>
                         </div>
                         <div className="form-group row">
@@ -273,7 +290,7 @@ class Menu extends Component{
                         <div class="form-group row">
                              <div class="col-12  text-center">
                                 <Button type="submit" color="primary"
-                                 onSubmit = {this.addNhanvien(errors)}
+                                 onClick = {this.addNhanvien}
                                 >Thêm nhân viên</Button>
                             </div>
                         </div>  

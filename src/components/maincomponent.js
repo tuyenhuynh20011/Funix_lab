@@ -15,11 +15,19 @@ class Main extends Component{
       staffs: STAFFS,
       department: DEPARTMENTS,
     };  
-    
+    this.callbackFunction =this.callbackFunction.bind(this);
   }
-  
+  callbackFunction = (childData) => {
+    const newList = this.state.staffs;
+    const id = this.state.staffs.length;
+    childData.id = id;
+    newList.push(childData);
+    this.setState({
+      staffs: newList
+    });
+}
   render(){
-    
+  
     const staffsWithId = ({match}) => {
       if (this.state.staffs.length >parseInt(match.params.staffsId,10)){
       return(
@@ -45,7 +53,7 @@ class Main extends Component{
       <div className="App">
           <Header/>
           <Switch>
-              <Route exact path='/menu' component={() => <Menu staffs={this.state.staffs} />} />
+              <Route exact path='/menu' component={() => <Menu staffs={this.state.staffs} parentCallback = {this.callbackFunction}/>} />
               <Route path='/menu/:staffsId' component={staffsWithId} />
               <Route exact path='/department' component={() => <Department department={this.state.department}/> }/>
               <Route path='/department/:departmentId' component={DepartmentwId} />
