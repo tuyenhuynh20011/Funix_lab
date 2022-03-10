@@ -2,12 +2,6 @@ import React from 'react';
 import { Card,CardTitle,CardText,Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function tinh_luong(staff){
-    const basicSalary = 3000000;
-    const overTimeSalary = 200000;
-    const salary = (staff.salaryScale * basicSalary) + (staff.overTime * overTimeSalary);
-    return salary;
-}
 function Render_Item({staff}){
     return(
         <Card>
@@ -15,7 +9,7 @@ function Render_Item({staff}){
             <CardText>Mã nhân viên:&nbsp; {staff.id}</CardText>
             <CardText>Hệ số lương:&nbsp; {staff.salaryScale}</CardText>
             <CardText>Số giờ làm thêm:&nbsp; {staff.overTime}</CardText>
-            <CardText style ={{backgroundColor:"#1e7e34",height :"30px", color:"#FFFFFF"}}>&nbsp;Lương:&nbsp;{tinh_luong(staff).toFixed()} </CardText>
+            <CardText style ={{backgroundColor:"#1e7e34",height :"30px", color:"#FFFFFF"}}>&nbsp;Lương:&nbsp;{staff.salary} </CardText>
         </Card>
     )
 
@@ -23,7 +17,7 @@ function Render_Item({staff}){
 
 function Breadcrumb1({allItem, id}){
     console.log(allItem);
-if (allItem === true ){
+if (allItem === true ){ 
     return(
         <Breadcrumb style={{marginTop:"5px"}}>
             <BreadcrumbItem><Link to="/menu">Nhân viên</Link></BreadcrumbItem>

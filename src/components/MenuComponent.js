@@ -17,7 +17,7 @@ class Menu extends Component{
     constructor(props) {
         super(props);
         this.state={
-            staffs:this.props.staffs.staffs,
+            staffs:this.props.staffs,
             name:'',
             isModalOpen: false,
         }
@@ -29,8 +29,7 @@ class Menu extends Component{
     handleSearch(event){
         
         event.preventDefault();
-        const result = this.props.staffs.staffs.filter(s => s.name.toLowerCase().match(this.state.name.toLowerCase()));
-        console.log(result);
+        const result = this.props.staffs.filter(s => s.name.toLowerCase().match(this.state.name.toLowerCase()));
         this.setState({
             staffs:result,
             name:this.name.value,
@@ -61,6 +60,7 @@ class Menu extends Component{
             const minLength = (len) => (val) => !chuanhap(val)||(val && (val.length >= len));
             const maxLength = (len) => (val) => !(val) || (val.length <= len);
             const soDuong = (val)=> !(isNumber(val))||val>=0;
+            console.log(this.state);
             const menu = this.state.staffs.map((staffs) => {
                 return (
                     <div  className="col-12 col-md-4 col-lg-2">

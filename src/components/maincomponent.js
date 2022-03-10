@@ -2,27 +2,30 @@ import React, {Component} from 'react';
 import Menu from './MenuComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent.js';
-import DishDetail from './DishdetailComponent';
+import StaffDetail from './DishdetailComponent';
 import Department from './departmentcomponents';
 import Salary from './salarycomponents';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchStaffs} from '../redux/ActionCreators';
+import { fetchStaffs,fetchDepartments} from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
   return {
     staffs: state.staffs,
-    department: state.department,
+    departments: state.departments,
   }
 }
 const mapDispatchToProps = dispatch => ({
   fetchStaffs: () => { dispatch(fetchStaffs())},
+  fetchDepartments: ()=> {dispatch(fetchDepartments())},
+  
 });
 
 class Main extends Component{
   componentDidMount() { 
   this.props.fetchStaffs();
+  this.props.fetchDepartments();
   }
   //constructor(props) {
    // super(props);
@@ -32,7 +35,6 @@ class Main extends Component{
   
 
   callbackFunction = (childData) => {
-    console.log(childData.department === 'Sale');
     //const newList = this.props.staffs;
     //const id = this.props.staffs.length;
    
@@ -65,10 +67,12 @@ class Main extends Component{
   //   });
 }
   render(){
+
     const staffsWithId = ({match}) => {
       if (this.props.staffs.staffs.length >parseInt(match.params.staffsId,10)){
       return(
-          <DishDetail staff={this.props.staffs.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0]} 
+          <StaffDetail staff={this.props.staffs.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0]} 
+              department ={this.props.departments.departments}
              />
       );
       }
@@ -78,23 +82,22 @@ class Main extends Component{
         )
       }
     };
-    const DepartmentwId = ({match}) => {
+    const DepartmentwId = ({match}) => { 
+      const department = this.props.departments.departments.filter((department)=>department.name===match.params.departmentId)[0];
       return(
-          <Salary staffs={this.props.staffs.staffs.filter((staffs) => staffs.department.name === match.params.departmentId)}
-            allItem ={0} id = {match.params.departmentId}
+          <Menu staffs={this.props.staffs.staffs.filter((staffs) => staffs.departmentId === department.id)}
              />
       );
       }
-  
     return (
       <div className="App">
           <Header/>
           <Switch>
-              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs} parentCallback = {this.callbackFunction}/>} />
+              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} parentCallback = {this.callbackFunction}/>} />
               <Route path='/menu/:staffsId' component={staffsWithId} />
-              <Route exact path='/department' component={() => <Department department={this.props.department}/> }/>
+              <Route exact path='/department' component={() => <Department department={this.props.departments.departments}/> }/>
               <Route path='/department/:departmentId' component={DepartmentwId} />
-              <Route exact path='/salary' component={() => <Salary staffs={this.props.staffs} allItem ={1}/>} />
+              <Route exact path='/salary' component={() => <Salary staffs={this.props.staffs.staffs} allItem ={true}/>} />
               <Redirect to="/menu" />
           </Switch>
            <Footer/>
