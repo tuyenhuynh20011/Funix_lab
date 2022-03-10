@@ -16,7 +16,7 @@ const DishDetail = (props) => {
                 </div> 
         <div className="row">
             <div  className="col-12 col-md-4 col-lg-3">
-                <Card>
+                <Card style ={{border:'0px'}}>
                     <CardImg top src={props.staff.image} alt={props.staff.name} />
                 </Card>
             </div>
@@ -26,13 +26,14 @@ const DishDetail = (props) => {
                         <CardTitle style = {{color:"black"}}>Họ và tên: {props.staff.name}</CardTitle>
                          <CardText>Ngày sinh: {dateFormat(props.staff.doB,'dd/mm/yyyy')} </CardText>
                          <CardText>Ngày vào công ty:{dateFormat(props.staff.startDate,'dd/mm/yyyy')} </CardText>
-                         <CardText>Phòng ban:{props.staff.department.name} </CardText>
+                         <CardText>Phòng ban:{props.staff.departmentId} </CardText> 
                          <CardText>Số ngày nghỉ còn lại: {props.staff.annualLeave} </CardText>
                          <CardText>Số ngày làm thêm: {props.staff.overTime} </CardText>
                     </CardBody>
                 </Card>
             </div>
         </div>
+            <br/>
         </div>
     );
 }

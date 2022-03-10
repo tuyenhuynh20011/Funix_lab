@@ -3,10 +3,9 @@ import { Card, CardImg,CardTitle,Button,Input, Form, Row,Col, Modal, ModalHeader
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
  function RenderMenuItem ({staffs}) {
-
         return (
-            <Card>
-                <Link to={`/menu/${staffs.id}`} >
+            <Card style ={{border:'0px'}}>
+                <Link to={`/menu/${staffs.id}`} style ={{margin:'0px'}} >
                     <CardImg width="100%" src={staffs.image} alt={staffs.name} />
                     <CardTitle style = {{color:"black", textAlign: "center"}}>{staffs.name}</CardTitle>
                 </Link>
@@ -18,7 +17,7 @@ class Menu extends Component{
     constructor(props) {
         super(props);
         this.state={
-            staffs :this.props.staffs,
+            staffs:this.props.staffs.staffs,
             name:'',
             isModalOpen: false,
         }
@@ -28,8 +27,10 @@ class Menu extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSearch(event){
+        
         event.preventDefault();
-        const result = this.props.staffs.filter(s => s.name.toLowerCase().match(this.state.name.toLowerCase()));
+        const result = this.props.staffs.staffs.filter(s => s.name.toLowerCase().match(this.state.name.toLowerCase()));
+        console.log(result);
         this.setState({
             staffs:result,
             name:this.name.value,

@@ -22,7 +22,8 @@ function Render_Item({staff}){
 } 
 
 function Breadcrumb1({allItem, id}){
-if (allItem == true ){
+    console.log(allItem);
+if (allItem === true ){
     return(
         <Breadcrumb style={{marginTop:"5px"}}>
             <BreadcrumbItem><Link to="/menu">Nhân viên</Link></BreadcrumbItem>

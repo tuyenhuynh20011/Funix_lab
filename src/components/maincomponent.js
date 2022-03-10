@@ -7,6 +7,8 @@ import Department from './departmentcomponents';
 import Salary from './salarycomponents';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { fetchStaffs} from '../redux/ActionCreators';
+
 
 const mapStateToProps = state => {
   return {
@@ -14,53 +16,59 @@ const mapStateToProps = state => {
     department: state.department,
   }
 }
+const mapDispatchToProps = dispatch => ({
+  fetchStaffs: () => { dispatch(fetchStaffs())},
+});
+
 class Main extends Component{
-  constructor(props) {
-    super(props);
-    this.callbackFunction =this.callbackFunction.bind(this);
+  componentDidMount() { 
+  this.props.fetchStaffs();
   }
+  //constructor(props) {
+   // super(props);
+  //  this.callbackFunction =this.callbackFunction.bind(this);
+ // }
 
   
 
   callbackFunction = (childData) => {
     console.log(childData.department === 'Sale');
-    const newList = this.props.staffs;
-    const id = this.props.staffs.length;
+    //const newList = this.props.staffs;
+    //const id = this.props.staffs.length;
    
-    const nhan_vien_moi ={
-            id: id,
-            name: childData.username,
-            doB: childData.doB,
-            salaryScale: childData.salaryScale,
-            startDate: childData.startDate,
-            department:childData.department,
-            annualLeave: childData.annualLeave,
-            overTime: childData.overTime,
-            image: '/assets/images/alberto.png',
-    }
-    if (childData.department ==='Sale')
-    nhan_vien_moi.department = this.props.department[0];
-  else if (childData.department ==='HR')
-  nhan_vien_moi.department = this.props.department[1];
+  //   const nhan_vien_moi ={
+  //           id: id,
+  //           name: childData.username,
+  //           doB: childData.doB,
+  //           salaryScale: childData.salaryScale,
+  //           startDate: childData.startDate,
+  //           department:childData.department,
+  //           annualLeave: childData.annualLeave,
+  //           overTime: childData.overTime,
+  //           image: '/assets/images/alberto.png',
+  //   }
+  //   if (childData.department ==='Sale')
+  //   nhan_vien_moi.department = this.props.department[0];
+  // else if (childData.department ==='HR')
+  // nhan_vien_moi.department = this.props.department[1];
 
-  else if (childData.department ==='Marketing')
-  nhan_vien_moi.department = this.props.department[2];
-  else if(childData.department ==='IT')
-  nhan_vien_moi.department = this.props.department[3];
-  else 
-  nhan_vien_moi.department = this.props.department[4];
+  // else if (childData.department ==='Marketing')
+  // nhan_vien_moi.department = this.props.department[2];
+  // else if(childData.department ==='IT')
+  // nhan_vien_moi.department = this.props.department[3];
+  // else 
+  // nhan_vien_moi.department = this.props.department[4];
     
-    newList.push(nhan_vien_moi);
-    this.setState({
-      staffs: newList
-    });
+  //   newList.push(nhan_vien_moi);
+  //   this.setState({
+  //     staffs: newList
+  //   });
 }
   render(){
-    console.log(this.state);
     const staffsWithId = ({match}) => {
-      if (this.props.staffs.length >parseInt(match.params.staffsId,10)){
+      if (this.props.staffs.staffs.length >parseInt(match.params.staffsId,10)){
       return(
-          <DishDetail staff={this.props.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0]} 
+          <DishDetail staff={this.props.staffs.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0]} 
              />
       );
       }
@@ -72,7 +80,7 @@ class Main extends Component{
     };
     const DepartmentwId = ({match}) => {
       return(
-          <Salary staffs={this.props.staffs.filter((staffs) => staffs.department.name === match.params.departmentId)}
+          <Salary staffs={this.props.staffs.staffs.filter((staffs) => staffs.department.name === match.params.departmentId)}
             allItem ={0} id = {match.params.departmentId}
              />
       );
@@ -96,4 +104,4 @@ class Main extends Component{
   }
   
 }
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));
