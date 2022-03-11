@@ -39,6 +39,46 @@ export const addStaff = (staff) => ({
 });
 
 
+export const postStaffs= (id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave) => (dispatch) => {
+  const newStaff= {
+      id : id,
+      name: name,
+      doB: doB,
+      salaryScale: salaryScale,
+      startDate: startDate,
+      departmentId:departmentId,
+      annualLeave: annualLeave,
+      overTime: overTime,
+      image : "/assets/images/alberto.png",
+      salary: 3500000
+  };
+  
+  return fetch(baseUrl + 'staffs', {
+      method: "POST",
+      body: JSON.stringify(newStaff),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+  })
+  .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+          throw error;
+    })
+  .then(response => response.json())
+  .then(response => dispatch(addStaff(response)))
+  .catch(error =>  { console.log('post Staff', error.message); alert('Your comment could not be posted\nError: '+error.message); });
+};
+
+
 //department
 export const fetchDepartments = () => (dispatch) => {
 

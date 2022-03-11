@@ -7,7 +7,7 @@ import Department from './departmentcomponents';
 import Salary from './salarycomponents';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchStaffs,fetchDepartments} from '../redux/ActionCreators';
+import { fetchStaffs,fetchDepartments, postStaffs} from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -19,6 +19,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchStaffs: () => { dispatch(fetchStaffs())},
   fetchDepartments: ()=> {dispatch(fetchDepartments())},
+  postStaffs: (id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave) => dispatch(postStaffs(id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave))
   
 });
 
@@ -85,7 +86,7 @@ class Main extends Component{
     const DepartmentwId = ({match}) => { 
       const department = this.props.departments.departments.filter((department)=>department.name===match.params.departmentId)[0];
       return(
-          <Menu staffs={this.props.staffs.staffs.filter((staffs) => staffs.departmentId === department.id)}
+          <Menu staffs={this.props.staffs.staffs.filter((staffs) => staffs.departmentId === department.id)} postStaffs ={this.props.postStaffs}
              />
       );
       }
@@ -93,7 +94,7 @@ class Main extends Component{
       <div className="App">
           <Header/>
           <Switch>
-              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} parentCallback = {this.callbackFunction}/>} />
+              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} postStaffs ={this.props.postStaffs}/>} />
               <Route path='/menu/:staffsId' component={staffsWithId} />
               <Route exact path='/department' component={() => <Department department={this.props.departments.departments}/> }/>
               <Route path='/department/:departmentId' component={DepartmentwId} />

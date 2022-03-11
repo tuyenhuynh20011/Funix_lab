@@ -2,7 +2,7 @@ import React from 'react';
 import { Card,CardTitle,CardText,Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function Render_Item({staff}){
+function RenderItem({staff}){
     return(
         <Card>
             <CardTitle>&nbsp;{staff.name}</CardTitle>
@@ -16,7 +16,6 @@ function Render_Item({staff}){
 } 
 
 function Breadcrumb1({allItem, id}){
-    console.log(allItem);
 if (allItem === true ){ 
     return(
         <Breadcrumb style={{marginTop:"5px"}}>
@@ -39,7 +38,7 @@ const Salary= (props)=>{
     const listItem = props.staffs.map((staff) => {
         return (
             <div  className="col-12 col-md-6 col-lg-4">
-              <Render_Item staff = {staff} />
+              <RenderItem staff = {staff} />
             </div>
           );
       })

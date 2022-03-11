@@ -47,8 +47,21 @@ class Menu extends Component{
           });
     }
     handleSubmit(values) {
-        // event.preventDefault();
-        this.props.parentCallback(values);
+        // event.preventDefault(); (id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave)
+         var departmentId;
+        if(values.department ==='Sale')
+            departmentId = 'Dept01';
+        else if(values.department ==='Marketing')
+            departmentId ='Dept03';
+        else if(values.department === 'IT')
+            departmentId ='Dept04';
+
+        else if(values.department ==='HR')
+             departmentId ='Dept02';
+        else
+             departmentId ='Dept05';
+        console.log(values);
+        this.props.postStaffs(this.props.staffs.length,values.username,values.doB,values.startDate,departmentId,values.salaryScale,values.overTime,values.annualLeave);
 
     }
     
