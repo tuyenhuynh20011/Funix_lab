@@ -27,14 +27,19 @@ class Menu extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSearch(event){
-        
         event.preventDefault();
-        const result = this.props.staffs.filter(s => s.name.toLowerCase().match(this.state.name.toLowerCase()));
-        this.setState({
-            staffs:result,
-            name:this.name.value,
-        });
+        // console.log('STATE NAME ' + this.state.name);
+        // console.log('PROPS STAFF ' + JSON.stringify(this.props.staffs));
+        //Check if Staff Name is undefined or not.
+
         
+            const result = this.props.staffs.filter(s => s.name?.toLowerCase().match(this.state?.name.toLowerCase()));
+            this.setState({
+                staffs:result,
+                name:this.name.value,
+            });
+    
+    
     }
     handleInputChange(event){
         this.setState({
@@ -47,21 +52,7 @@ class Menu extends Component{
           });
     }
     handleSubmit(values) {
-        // event.preventDefault(); (id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave)
-         var departmentId;
-        if(values.department ==='Sale')
-            departmentId = 'Dept01';
-        else if(values.department ==='Marketing')
-            departmentId ='Dept03';
-        else if(values.department === 'IT')
-            departmentId ='Dept04';
-
-        else if(values.department ==='HR')
-             departmentId ='Dept02';
-        else
-             departmentId ='Dept05';
-        console.log(values);
-        this.props.postStaffs(this.props.staffs.length,values.username,values.doB,values.startDate,departmentId,values.salaryScale,values.overTime,values.annualLeave);
+        this.props.postStaffs(values.username,values.doB,values.startDate,values.department,values.salaryScale,values.overTime,values.annualLeave);
 
     }
     
@@ -73,11 +64,10 @@ class Menu extends Component{
             const minLength = (len) => (val) => !chuanhap(val)||(val && (val.length >= len));
             const maxLength = (len) => (val) => !(val) || (val.length <= len);
             const soDuong = (val)=> !(isNumber(val))||val>=0;
-            console.log(this.state);
-            const menu = this.state.staffs.map((staffs) => {
+            const menu = this.state.staffs.map((staff,index) => {
                 return (
-                    <div  className="col-12 col-md-4 col-lg-2">
-                        <RenderMenuItem staffs = {staffs} />
+                    <div  className="col-12 col-md-4 col-lg-2" key = {index}>
+                        <RenderMenuItem staffs = {staff} />
                     </div>
                 );
             });
@@ -164,13 +154,13 @@ class Menu extends Component{
                                 <Label htmlFor="department" md={4}>Phòng ban</Label>
                                 <Col md={8}>
                                     <Control.select model=".department" id="department" name="department"
-                                        defaultValue ='Sale'
+                                        defaultValue ='Dept01' 
                                         className="form-control"> 
-                                            <option>Sale</option>
-                                            <option>HR</option>
-                                            <option>Marketing</option>
-                                            <option>IT</option>
-                                            <option>Finance</option>
+                                            <option value='Dept01'>Sale</option>
+                                            <option value='Dept02'>HR</option>
+                                            <option value='Dept03'>Marketing</option>
+                                            <option value='Dept04'>IT </option>
+                                            <option value='Dept05'>Finance</option>
                                          </Control.select>
                                 </Col>
                             </Row>

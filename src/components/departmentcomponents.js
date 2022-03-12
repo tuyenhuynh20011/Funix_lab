@@ -12,7 +12,6 @@ function RenderMenuItem ({departments}){
     );
 }
 const Department= (props)=>{
-    console.log(props);
     const menu = props.department.map((department) => {
         return (
           <div  className="col-12 col-md-4 col-lg-3 m-1">

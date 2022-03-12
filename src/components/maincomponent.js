@@ -7,7 +7,7 @@ import Department from './departmentcomponents';
 import Salary from './salarycomponents';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchStaffs,fetchDepartments, postStaffs} from '../redux/ActionCreators';
+import { fetchStaffs,fetchDepartments, postStaffs, deleteStaff} from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -19,69 +19,26 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchStaffs: () => { dispatch(fetchStaffs())},
   fetchDepartments: ()=> {dispatch(fetchDepartments())},
-  postStaffs: (id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave) => dispatch(postStaffs(id,name,doB,startDate,departmentId,salaryScale,overTime,annualLeave))
-  
+  postStaffs: (name,doB,startDate,departmentId,salaryScale,overTime,annualLeave) => dispatch(postStaffs(name,doB,startDate,departmentId,salaryScale,overTime,annualLeave)),
+  deleteStaff:(id)=> {dispatch(deleteStaff(id))}
 });
 
 class Main extends Component{
-  componentDidMount() { 
+  componentDidMount() {  // chạy khi render lần đầu tiên 
   this.props.fetchStaffs();
   this.props.fetchDepartments();
   }
-  //constructor(props) {
-   // super(props);
-  //  this.callbackFunction =this.callbackFunction.bind(this);
- // }
-
   
-
-  callbackFunction = (childData) => {
-    //const newList = this.props.staffs;
-    //const id = this.props.staffs.length;
-   
-  //   const nhan_vien_moi ={
-  //           id: id,
-  //           name: childData.username,
-  //           doB: childData.doB,
-  //           salaryScale: childData.salaryScale,
-  //           startDate: childData.startDate,
-  //           department:childData.department,
-  //           annualLeave: childData.annualLeave,
-  //           overTime: childData.overTime,
-  //           image: '/assets/images/alberto.png',
-  //   }
-  //   if (childData.department ==='Sale')
-  //   nhan_vien_moi.department = this.props.department[0];
-  // else if (childData.department ==='HR')
-  // nhan_vien_moi.department = this.props.department[1];
-
-  // else if (childData.department ==='Marketing')
-  // nhan_vien_moi.department = this.props.department[2];
-  // else if(childData.department ==='IT')
-  // nhan_vien_moi.department = this.props.department[3];
-  // else 
-  // nhan_vien_moi.department = this.props.department[4];
-    
-  //   newList.push(nhan_vien_moi);
-  //   this.setState({
-  //     staffs: newList
-  //   });
-}
   render(){
 
     const staffsWithId = ({match}) => {
-      if (this.props.staffs.staffs.length >parseInt(match.params.staffsId,10)){
+      
       return(
           <StaffDetail staff={this.props.staffs.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0]} 
               department ={this.props.departments.departments}
+              deleteStaff = {this.props.deleteStaff}
              />
       );
-      }
-      else{
-        return(
-          <h3>lỗi</h3>
-        )
-      }
     };
     const DepartmentwId = ({match}) => { 
       const department = this.props.departments.departments.filter((department)=>department.name===match.params.departmentId)[0];

@@ -35,9 +35,9 @@ else{
 }
 
 const Salary= (props)=>{
-    const listItem = props.staffs.map((staff) => {
+    const listItem = props.staffs.map((staff,index) => {
         return (
-            <div  className="col-12 col-md-6 col-lg-4">
+            <div  className="col-12 col-md-6 col-lg-4" key = {index}>
               <RenderItem staff = {staff} />
             </div>
           );
