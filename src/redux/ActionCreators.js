@@ -104,7 +104,7 @@ export const PatchStaffs= (Staff) => (dispatch) => {
 };
 
 
-export const deleteStaff= (id) => () => {
+export const deleteStaff= (id) => (dispatch) => {
   return fetch(baseUrl + 'staffs/'+ id, {
       method: "DELETE"
   })
@@ -121,9 +121,7 @@ export const deleteStaff= (id) => () => {
           throw error;
     })
   .then(response => response.json())
-  .then(response => {  
-    alert('Đã Xóa Thành Công')
-    })
+  .then(response => dispatch(addStaff(response)))
   .catch(error =>  { console.log('Delete Staff', error.message); alert('ko xoa dc\nError: '+error.message); });
 };
 
