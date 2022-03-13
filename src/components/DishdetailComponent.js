@@ -29,16 +29,16 @@ class StaffDetail extends Component{
               });
         }
         delStaff(){
-            const history =  useHistory();
+            //const history =  useHistory();
             this.props.deleteStaff(this.props.staff?.id);   
-            history.push('/menu');
+           // history.push('/menu');
         }
         handleSubmit(values) {
                 const Staff ={
                     id: this.props.staff.id,
-                    name: values.name,
+                    name: values.username,
                     annualLeave: values.annualLeave ,
-                    departmentId: values.departmentId,
+                    departmentId: values.department,
                     doB: values.doB,
                     image: this.props.staff.image,
                     overTime: values.overTime,
