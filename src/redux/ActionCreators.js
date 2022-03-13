@@ -76,6 +76,33 @@ export const postStaffs= (name,doB,startDate,departmentId,salaryScale,overTime,a
   .catch(error =>  { console.log('post Staff', error.message); alert('new staff could not be posted\nError: '+error.message); });
 };
 
+export const PatchStaffs= (Staff) => (dispatch) => {
+  
+  return fetch(baseUrl + 'staffs', {
+      method: "PATCH",
+      body: JSON.stringify(Staff),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+  })
+  .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+          throw error;
+    })
+  .then(response => response.json())
+  .then(response => dispatch(addStaff(response)))
+  .catch(error =>  { console.log('patch Staff', error.message); alert('staff could not be edited\nError: '+error.message); });
+};
+
 
 export const deleteStaff= (id) => () => {
   return fetch(baseUrl + 'staffs/'+ id, {

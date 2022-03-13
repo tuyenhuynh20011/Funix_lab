@@ -1,22 +1,72 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardBody,CardTitle, Breadcrumb, BreadcrumbItem,Col,Button } from 'reactstrap';
+import React,{Component} from 'react';
+import { Card, CardImg, CardText, CardBody,CardTitle, Breadcrumb, BreadcrumbItem,Col,Button, Row, Modal, ModalHeader, ModalBody,Label } from 'reactstrap';
 import { Link, useHistory} from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 import dateFormat from "dateformat";
 
-const StaffDetail = (props) => {
-    let history =  useHistory();
-    const department = props.department?.filter((department)=>department.id===props.staff?.departmentId)[0];
-    function delStaff(){
-        props.deleteStaff(props.staff?.id);   
-        history.push('/menu')
-    }
-   if (props.staff){
+
+   
+  
+        //this.props.postStaffs(values.username,values.doB,values.startDate,values.department,values.salaryScale,values.overTime,values.annualLeave);
+
+
+  
+
+class StaffDetail extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            isModalOpen: false,
+            }
+        this.delStaff=this.delStaff.bind(this);
+        this.toggleModal= this.toggleModal.bind(this);
+        this.handleSubmit= this.handleSubmit.bind(this);
+        
+        }
+        toggleModal(){
+            this.setState({
+                isModalOpen: !this.state.isModalOpen
+              });
+        }
+        delStaff(){
+            const history =  useHistory();
+            this.props.deleteStaff(this.props.staff?.id);   
+            history.push('/menu');
+        }
+        handleSubmit(values) {
+                const Staff ={
+                    id: this.props.staff.id,
+                    name: values.name,
+                    annualLeave: values.annualLeave ,
+                    departmentId: values.departmentId,
+                    doB: values.doB,
+                    image: this.props.staff.image,
+                    overTime: values.overTime,
+                    salary: values.salary,
+                    salaryScale: values.salaryScale,
+                    startDate: values.startDate
+                }
+                this.props.PatchStaffs(Staff);
+        }
+    render (){
+    const department = this.props.department?.filter((department)=>department.id===this.props.staff?.departmentId)[0];
+    const chuanhap = (val) => val&&(val.length>=0);
+    const isNumber = (val) => !isNaN(Number(val));
+    const minNum = (val)=> !chuanhap(val)||!isNumber(val)||val>=1 ;
+    const maxNum = (val)=> val<=3||!isNumber(val);
+    const minLength = (len) => (val) => !chuanhap(val)||(val && (val.length >= len));
+    const maxLength = (len) => (val) => !(val) || (val.length <= len);
+    const soDuong = (val)=> !(isNumber(val))||val>=0;
+    const datadoB = dateFormat(this.props.staff?.doB,'yyyy-mm-dd');
+    const startDate = dateFormat(this.props.staff?.startDate,'yyyy-mm-dd');
+    console.log(datadoB);
+   if (this.props.staff){
     return(
         <div className="container">
            <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/menu">Nhân viên</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{props.staff?.name}</BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.staff?.name}</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
                         <hr />
@@ -25,35 +75,213 @@ const StaffDetail = (props) => {
         <div className="row">
             <div  className="col-12 col-md-4 col-lg-3">
                 <Card style ={{border:'0px'}}>
-                    <CardImg top src={props.staff?.image} alt={props.staff?.name} />
+                    <CardImg top src={this.props.staff?.image} alt={this.props.staff?.name} />
                 </Card>
             </div>
             <div  className="col-12 col-md-8 col-lg-9">
                 <Card>
                     <CardBody>
-                        <CardTitle style = {{color:"black"}}>Họ và tên:&nbsp;{props.staff?.name}</CardTitle>
-                         <CardText>Ngày sinh:&nbsp;{dateFormat(props.staff?.doB,'dd/mm/yyyy')} </CardText>
-                         <CardText>Ngày vào công ty:&nbsp;{dateFormat(props.staff?.startDate,'dd/mm/yyyy')} </CardText>
+                        <CardTitle style = {{color:"black"}}>Họ và tên:&nbsp;{this.props.staff?.name}</CardTitle>
+                         <CardText>Ngày sinh:&nbsp;{dateFormat(this.props.staff?.doB,'dd/mm/yyyy')} </CardText>
+                         <CardText>Ngày vào công ty:&nbsp;{dateFormat(this.props.staff?.startDate,'dd/mm/yyyy')} </CardText>
                          <CardText>Phòng ban:&nbsp;{department?.name} </CardText> 
-                         <CardText>Số ngày nghỉ còn lại:&nbsp;{props.staff?.annualLeave} </CardText>
-                         <CardText>Số ngày làm thêm:&nbsp;{props.staff?.overTime} </CardText>
+                         <CardText>Số ngày nghỉ còn lại:&nbsp;{this.props.staff?.annualLeave} </CardText>
+                         <CardText>Số ngày làm thêm:&nbsp;{this.props.staff?.overTime} </CardText>
                     </CardBody>
                 </Card>
                 <div>
                 <Col style={{marginTop:"10px"}}>
-                                            <Button type="submit" color="primary"
+                                            <Button type="submit" color="primary" onClick={this.toggleModal}
                                             >Edit</Button>
-                                            <Button type="submit" color="primary" style={{marginLeft: '10px'}} onClick={delStaff}
+                                            <Button type="submit" color="primary" style={{marginLeft: '10px'}} onClick={this.delStaff}
                                             >Delete</Button>
                                         </Col>
                             </div>
             </div>
         </div>
             <br/>
+            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                        <ModalHeader toggle={this.toggleModal}> Cập nhật thông tin</ModalHeader>
+                        <ModalBody>
+                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <Row className="form-group">
+                                <Label htmlFor="username" md={4}>Tên</Label>
+                                <Col md={8}>
+                                    <Control.text model=".username" id="username" name="username"
+                                        placeholder="Name"
+                                        defaultValue ={this.props.staff?.name}
+                                        className="form-control"
+                                        validators={{
+                                            chuanhap,
+                                            minLength: minLength(3), maxLength: maxLength(30)
+                                        }}
+                                         />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".username"
+                                        show="touched"
+                                        messages={{
+                                            chuanhap: 'Chưa nhập ',
+                                            minLength: 'Ít nhất 3 kí tự',
+                                            maxLength: 'Tối đa 30 kí tự'
+
+                                        }}
+                                     />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="doB" md={4}>Ngày sinh</Label>
+                                <Col md={8}>
+                                    <Control.text model=".doB" id="doB" name="doB"
+                                        className="form-control" type='date'
+                                        defaultValue ={datadoB}
+                                         />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="startDate" md={4}>Ngày vào công ty</Label>
+                                <Col md={8}>
+                                    <Control.text model=".startDate" id="startDate" name="startDate"
+                                        className="form-control" type='date'
+                                        defaultValue ={startDate}
+                                         />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="department" md={4}>Phòng ban</Label>
+                                <Col md={8}>
+                                    <Control.select model=".department" id="department" name="department"
+                                        defaultValue ={this.props.staff?.departmentId}
+                                        className="form-control"> 
+                                            <option value='Dept01'>Sale</option>
+                                            <option value='Dept02'>HR</option>
+                                            <option value='Dept03'>Marketing</option>
+                                            <option value='Dept04'>IT </option>
+                                            <option value='Dept05'>Finance</option>
+                                         </Control.select>
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="salaryScale" md={4}>Hệ số lương</Label>
+                                <Col md={8}>
+                                    <Control.text model=".salaryScale" id="salaryScale" name="salaryScale"
+                                        placeholder ="1->3"
+                                        defaultValue ={this.props.staff?.salaryScale}
+                                        className="form-control"
+                                        validators={{
+                                            chuanhap,
+                                            isNumber,
+                                            minNum,
+                                            maxNum
+                                        }}
+                                         />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".salaryScale"
+                                        show="touched"
+                                        messages={{
+                                            chuanhap: 'Chưa nhập ',
+                                            isNumber: 'Phải là số ',
+                                            minNum: 'Phải >= 1 ',
+                                            maxNum: 'Phải <=3 '
+                                        }}
+                                     />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="salary" md={4}>Lương</Label>
+                                <Col md={8}>
+                                    <Control.text model=".salary" id="salary" name="salary"
+                                        
+                                        defaultValue ={this.props.staff?.salary}
+                                        className="form-control"
+                                        // validators={{
+                                        //     chuanhap,
+                                        //     isNumber,
+                                        //     minNum,
+                                        //     maxNum
+                                        // }}
+                                         />
+                                    {/* <Errors
+                                        // className="text-danger"
+                                        // model=".salary"
+                                        // show="touched"
+                                        // messages={{
+                                        //     chuanhap: 'Chưa nhập ',
+                                        //     isNumber: 'Phải là số ',
+                                        //     minNum: 'Phải >= 1 ',
+                                        //     maxNum: 'Phải <=3 '
+                                        // }}
+                                     /> */}
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="annualLeave" md={4}>Số ngày nghỉ còn lại</Label>
+                                <Col md={8}>
+                                    <Control.text model=".annualLeave" id="annualLeave" name="annualLeave"
+                                        defaultValue ={this.props.staff?.annualLeave}
+                                        className="form-control"
+                                        validators={{
+                                            chuanhap,
+                                            isNumber,
+                                            soDuong
+                                        }}
+                                         />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".annualLeave"
+                                        show="touched"
+                                        messages={{
+                                            chuanhap: 'Chưa nhập ',
+                                            isNumber: 'Phải là số',
+                                            soDuong: 'Phải >=0'
+
+                                        }}
+                                     />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="overTime" md={4}>Số ngày làm thêm</Label>
+                                <Col md={8}>
+                                    <Control.text model=".overTime" id="overTime" name="overTime"
+                                        defaultValue={this.props.staff?.overTime}
+                                        className="form-control"
+                                        validators={{
+                                            chuanhap,
+                                            isNumber,
+                                            soDuong
+                                        }}
+                                    />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".overTime"
+                                        show="touched"
+                                        messages={{
+                                            chuanhap: 'Chưa nhập ',
+                                            isNumber: 'Phải là số',
+                                            soDuong: 'Phải >=0'
+
+                                        }}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Col xs ={6}  md ={4} style ={{margin:'auto'}}>
+                                    <Button type="submit" color="primary">
+                                     Lưu lại
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </LocalForm>
+                    </ModalBody>
+                </Modal>
         </div>
     );
 
    } else return(<div></div> );
    
+
+    }
+    
 }
 export default StaffDetail;
