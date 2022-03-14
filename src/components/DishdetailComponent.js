@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import { Card, CardImg, CardText, CardBody,CardTitle, Breadcrumb, BreadcrumbItem,Col,Button, Row, Modal, ModalHeader, ModalBody,Label } from 'reactstrap';
-import { Link, useHistory} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import dateFormat from "dateformat";
+import { Loading } from './LoadingComponent';
 
 
    
@@ -59,11 +60,28 @@ class StaffDetail extends Component{
     const soDuong = (val)=> !(isNumber(val))||val>=0;
     const datadoB = dateFormat(this.props.staff?.doB,'yyyy-mm-dd');
     const startDate = dateFormat(this.props.staff?.startDate,'yyyy-mm-dd');
-    console.log(datadoB);
-   if (this.props.staff){
-    return(
-        <div className="container">
-           <div className="row">
+    if (this.props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (this.props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{this.props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (this.props.staff != null) {
+        return(
+            <div className="container">
+                <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/menu">Nhân viên</Link></BreadcrumbItem>
                         <BreadcrumbItem active>{this.props.staff?.name}</BreadcrumbItem>
@@ -277,7 +295,6 @@ class StaffDetail extends Component{
                 </Modal>
         </div>
     );
-
    } else return(<div></div> );
    
 

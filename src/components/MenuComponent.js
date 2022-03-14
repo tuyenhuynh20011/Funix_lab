@@ -2,14 +2,33 @@ import React,{Component} from 'react';
 import { Card, CardImg,CardTitle,Button,Input, Form, Row,Col, Modal, ModalHeader, ModalBody,Label} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
- function RenderMenuItem ({staffs}) {
+import { FadeTransform } from 'react-animation-components';
+import { Loading } from './LoadingComponent';
+ function RenderMenuItem ({staffs,isLoading,errMess}) {
+    if (isLoading) {
+        return(
+                <Loading />
+        );
+    }
+    else if (errMess) {
+        return(
+                <h4>{errMess}</h4>
+        );
+    }
+    else 
         return (
+            <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.25) translateY(-50%)'
+            }}>
             <Card style ={{border:'0px'}}>
                 <Link to={`/menu/${staffs.id}`} style ={{margin:'0px'}} >
                     <CardImg width="100%" src={staffs.image} alt={staffs.name} />
                     <CardTitle style = {{color:"black", textAlign: "center"}}>{staffs.name}</CardTitle>
                 </Link>
             </Card>
+            </FadeTransform>
         );      
 }
 
@@ -67,7 +86,7 @@ class Menu extends Component{
             const menu = this.state.staffs.map((staff,index) => {
                 return (
                     <div  className="col-12 col-md-4 col-lg-2" key = {index}>
-                        <RenderMenuItem staffs = {staff} />
+                        <RenderMenuItem staffs = {staff} isLoading={this.props.dishesLoading} errMess={this.props.dishesErrMess} />
                     </div>
                 );
             });

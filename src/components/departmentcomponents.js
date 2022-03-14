@@ -1,14 +1,22 @@
 import React from 'react';
 import { Card,CardTitle,CardText} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { FadeTransform } from 'react-animation-components';
+
 function RenderMenuItem ({departments}){
     return (
+        <FadeTransform
+        in
+        transformProps={{
+            exitTransform: 'scale(0.25) translateY(-50%)'
+        }}>
         <Card style={{margin:'10px'}}>
             <Link to={`/department/${departments.name}`}>
                 <CardTitle style = {{color:"black",marginTop:'5px',marginLeft:'5px'}}>{departments.name}</CardTitle>
                 <CardText style={{margin:'20px'}}>Số lượng nhân viên: {departments.numberOfStaff}</CardText>
             </Link>
         </Card>
+        </FadeTransform>
     );
 }
 const Department= (props)=>{

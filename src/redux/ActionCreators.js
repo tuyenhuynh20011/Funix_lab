@@ -48,7 +48,7 @@ export const postStaffs= (name,doB,startDate,departmentId,salaryScale,overTime,a
       annualLeave: annualLeave,
       overTime: overTime,
       image : "/assets/images/alberto.png",
-      salary: 3500000
+      salary:3500000
   };
   
   return fetch(baseUrl + 'staffs', {

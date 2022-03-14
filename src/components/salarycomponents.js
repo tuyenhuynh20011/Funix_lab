@@ -1,9 +1,15 @@
 import React from 'react';
 import { Card,CardTitle,CardText,Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { FadeTransform } from 'react-animation-components';
 
 function RenderItem({staff}){
     return(
+        <FadeTransform
+        in
+        transformProps={{
+            exitTransform: 'scale(0.25) translateY(-50%)'
+        }}>
         <Card>
             <CardTitle>&nbsp;{staff.name}</CardTitle>
             <CardText>Mã nhân viên:&nbsp; {staff.id}</CardText>
@@ -11,6 +17,7 @@ function RenderItem({staff}){
             <CardText>Số giờ làm thêm:&nbsp; {staff.overTime}</CardText>
             <CardText style ={{backgroundColor:"#1e7e34",height :"30px", color:"#FFFFFF"}}>&nbsp;Lương:&nbsp;{staff.salary} </CardText>
         </Card>
+        </FadeTransform>
     )
 
 } 
