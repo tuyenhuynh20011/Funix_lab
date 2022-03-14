@@ -63,13 +63,14 @@ class Main extends Component{
               postStaffs ={this.props.postStaffs}
               dishesLoading={this.props.staffs.isLoading}
               dishesErrMess={this.props.staffs.errMess}
+              department ={department}
              />);
       else 
           return(
             <Menu staffs={this.props.staffs.staffs}
             postStaffs ={this.props.postStaffs}
-            dishesLoading={this.props.staffs.isLoading}
-            dishesErrMess={this.props.staffs.errMess}
+            staffsLoading={this.props.staffs.isLoading}
+            staffsErrMess={this.props.staffs.errMess}
            />
           )
       }
@@ -79,7 +80,8 @@ class Main extends Component{
           <TransitionGroup>
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
           <Switch location={this.props.location}>
-              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} postStaffs ={this.props.postStaffs}/>} />
+              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} postStaffs ={this.props.postStaffs} staffsLoading={this.props.staffs.isLoading}
+            staffsErrMess={this.props.staffs.errMess}/>} />
               <Route path='/menu/:staffsId' component={staffsWithId} />
               <Route exact path='/department' component={() => <Department department={this.props.departments.departments}/> }/>
               <Route path='/department/:departmentId' component={DepartmentwId} />

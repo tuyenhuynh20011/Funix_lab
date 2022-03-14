@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { FadeTransform } from 'react-animation-components';
 import { Loading } from './LoadingComponent';
+import { Transition } from 'react-transition-group';
  function RenderMenuItem ({staffs,isLoading,errMess}) {
     if (isLoading) {
         return(
@@ -39,6 +40,7 @@ class Menu extends Component{
             staffs:this.props.staffs,
             name:'',
             isModalOpen: false,
+            istransition: false,
         }
         this.handleSearch=this.handleSearch.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -72,6 +74,9 @@ class Menu extends Component{
     }
     handleSubmit(values) {
         this.props.postStaffs(values.username,values.doB,values.startDate,values.department,values.salaryScale,values.overTime,values.annualLeave);
+        this.setState({
+            istransition: true,
+        })
 
     }
     
@@ -86,11 +91,17 @@ class Menu extends Component{
             const menu = this.state.staffs.map((staff,index) => {
                 return (
                     <div  className="col-12 col-md-4 col-lg-2" key = {index}>
-                        <RenderMenuItem staffs = {staff} isLoading={this.props.dishesLoading} errMess={this.props.dishesErrMess} />
+                        <RenderMenuItem staffs = {staff} isLoading={this.props.staffsLoading} errMess={this.props.staffsErrMess} />
                     </div>
                 );
             });
+            
+
+
             return(
+                <Transition in = {this.state.istransition} timeout={700}>
+
+               
                 <div className="container">
                     <div className="row">
                             <div className="col-9 col-md-3 col-lg-2" style={{marginTop:"10px"}} >
@@ -271,6 +282,7 @@ class Menu extends Component{
                     </ModalBody>
                 </Modal>
                 </div>
+            </Transition>
             );
     }
 }
