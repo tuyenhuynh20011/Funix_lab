@@ -43,7 +43,6 @@ class StaffDetail extends Component{
                     doB: values.doB,
                     image: this.props.staff.image,
                     overTime: values.overTime,
-                    salary: values.salary,
                     salaryScale: values.salaryScale,
                     startDate: values.startDate
                 }
@@ -204,33 +203,6 @@ class StaffDetail extends Component{
                                             maxNum: 'Phải <=3 '
                                         }}
                                      />
-                                </Col>
-                            </Row>
-                            <Row className="form-group">
-                                <Label htmlFor="salary" md={4}>Lương</Label>
-                                <Col md={8}>
-                                    <Control.text model=".salary" id="salary" name="salary"
-                                        
-                                        defaultValue ={this.props.staff?.salary}
-                                        className="form-control"
-                                        // validators={{
-                                        //     chuanhap,
-                                        //     isNumber,
-                                        //     minNum,
-                                        //     maxNum
-                                        // }}
-                                         />
-                                    {/* <Errors
-                                        // className="text-danger"
-                                        // model=".salary"
-                                        // show="touched"
-                                        // messages={{
-                                        //     chuanhap: 'Chưa nhập ',
-                                        //     isNumber: 'Phải là số ',
-                                        //     minNum: 'Phải >= 1 ',
-                                        //     maxNum: 'Phải <=3 '
-                                        // }}
-                                     /> */}
                                 </Col>
                             </Row>
                             <Row className="form-group">

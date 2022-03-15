@@ -7,7 +7,7 @@ import Department from './departmentcomponents';
 import Salary from './salarycomponents';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchStaffs,fetchDepartments, postStaffs, deleteStaff, PatchStaffs} from '../redux/ActionCreators';
+import { fetchStaffs,fetchDepartments, postStaffs, deleteStaff, PatchStaffs, fetchsalary} from '../redux/ActionCreators';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
@@ -16,6 +16,7 @@ const mapStateToProps = state => {
   return {
     staffs: state.staffs,
     departments: state.departments,
+    salary: state.salary
   }
 }
 const mapDispatchToProps = dispatch => ({
@@ -23,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
   fetchDepartments: ()=> {dispatch(fetchDepartments())},
   postStaffs: (name,doB,startDate,departmentId,salaryScale,overTime,annualLeave) => dispatch(postStaffs(name,doB,startDate,departmentId,salaryScale,overTime,annualLeave)),
   deleteStaff:(id)=> {dispatch(deleteStaff(id))},
-  PatchStaffs:(Staff)=> {dispatch(PatchStaffs(Staff))}
+  PatchStaffs:(Staff)=> {dispatch(PatchStaffs(Staff))},
+  fetchsalary: () => {dispatch(fetchsalary())}
 
 });
 
@@ -31,10 +33,11 @@ class Main extends Component{
   componentDidMount() {  // chạy khi render lần đầu tiên 
   this.props.fetchStaffs();
   this.props.fetchDepartments();
+  this.props.fetchsalary();
   }
+
   
   render(){
-
     const staffsWithId = ({match}) => {
       const staff = this.props.staffs.staffs.filter((staffs) => staffs.id === parseInt(match.params.staffsId,10))[0];
       if ( staff != null)
@@ -80,12 +83,12 @@ class Main extends Component{
           <TransitionGroup>
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
           <Switch location={this.props.location}>
-              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} postStaffs ={this.props.postStaffs} staffsLoading={this.props.staffs.isLoading}
+              <Route exact path='/menu' component={() => <Menu staffs={this.props.staffs.staffs} postStaffs ={this.props.postStaffs} staffsLoading={this.props.staffs.isLoading} 
             staffsErrMess={this.props.staffs.errMess}/>} />
               <Route path='/menu/:staffsId' component={staffsWithId} />
               <Route exact path='/department' component={() => <Department department={this.props.departments.departments}/> }/>
               <Route path='/department/:departmentId' component={DepartmentwId} />
-              <Route exact path='/salary' component={() => <Salary staffs={this.props.staffs.staffs} allItem ={true}/>} />
+              <Route exact path='/salary' component={() => <Salary staffs={this.props.salary.salary} allItem ={true} fetchsalary ={this.props.fetchsalary}/>} />
               <Redirect to="/menu" />
           </Switch>
           </CSSTransition>

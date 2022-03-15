@@ -24,6 +24,7 @@ export const fetchStaffs = () => (dispatch) => {
 }
 
 
+
 export const staffsLoading = () => ({
     type: ActionTypes.STAFFS_LOADING
 });
@@ -40,6 +41,7 @@ export const addStaff = (staff) => ({
 
 export const postStaffs= (name,doB,startDate,departmentId,salaryScale,overTime,annualLeave) => (dispatch) => {
   const newStaff= {
+      id: 0,
       name: name,
       doB: doB,
       salaryScale: salaryScale,
@@ -48,7 +50,6 @@ export const postStaffs= (name,doB,startDate,departmentId,salaryScale,overTime,a
       annualLeave: annualLeave,
       overTime: overTime,
       image : "/assets/images/alberto.png",
-      salary:3500000
   };
   
   return fetch(baseUrl + 'staffs', {
@@ -161,4 +162,40 @@ export const departmentsFailed = (errmess) => ({
 export const addDepartments = (staff) => ({
     type: ActionTypes.ADD_DEPARTMENTS,
     payload: staff
+});
+
+
+export const fetchsalary = () => (dispatch) => {
+
+  dispatch(salaryLoading(true));
+
+  return fetch(baseUrl + 'staffsSalary')
+  .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+          var errmess = new Error(error.message);
+          throw errmess;
+    })
+  .then(response => response.json())
+  .then(salary => dispatch(addSalary(salary)))
+  .catch(error => dispatch(salaryFailed(error.message)));
+}
+export const salaryLoading = () => ({
+  type: ActionTypes.SALARY_LOADING
+});
+
+export const salaryFailed = (errmess) => ({
+  type: ActionTypes.SALARY_FAILED,
+  payload: errmess
+});
+export const addSalary = (staff) => ({
+  type: ActionTypes.ADD_SALARY,
+  payload: staff
 });
