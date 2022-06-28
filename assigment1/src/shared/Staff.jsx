@@ -41,7 +41,7 @@ export const STAFFS =
             department: DEPARTMENTS[0],
             annualLeave: 1,
             overTime: 1,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 1,
@@ -52,7 +52,7 @@ export const STAFFS =
             department: DEPARTMENTS[1],
             annualLeave: 2,
             overTime: 3,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 2,
@@ -63,7 +63,7 @@ export const STAFFS =
             department: DEPARTMENTS[3],
             annualLeave: 4,
             overTime: 5,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 3,
@@ -74,7 +74,7 @@ export const STAFFS =
             department: DEPARTMENTS[2],
             annualLeave: 6,
             overTime: 7,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 4,
@@ -85,7 +85,7 @@ export const STAFFS =
             department: DEPARTMENTS[2],
             annualLeave: 8,
             overTime: 1,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 5,
@@ -96,7 +96,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 6,
@@ -107,7 +107,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 7,
@@ -118,7 +118,7 @@ export const STAFFS =
             department: DEPARTMENTS[2],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 8,
@@ -129,7 +129,7 @@ export const STAFFS =
             department: DEPARTMENTS[3],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 9,
@@ -140,7 +140,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 10,
@@ -151,7 +151,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 11,
@@ -162,7 +162,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 12,
@@ -173,7 +173,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 13,
@@ -184,7 +184,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 14,
@@ -195,7 +195,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
         {
             id: 15,
@@ -206,7 +206,7 @@ export const STAFFS =
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,
-            image: '/assets/images/alberto.png',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU',
         },
 
     ]
