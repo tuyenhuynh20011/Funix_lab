@@ -1,10 +1,8 @@
 import React from "react";
 import { Card, Button } from "reactstrap";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 const RenderSalary = ({ staff,totalsalary }) => {
-  // const [array,setArray] = useState([]);
-  // staff.short((a,b) => (a.totalsalary > b.totalsalary) ? 1 : -1 )
-  // setArray(oldArray => [...oldArray,newValue] );
+
   return (
     <>
       <Card className="p-3">
@@ -20,32 +18,38 @@ const RenderSalary = ({ staff,totalsalary }) => {
   );
 };
 
-
-
 function Salary(props) {
     const [state,setState] = useState(props.staff);
-    const sortSolary=() =>  {
-     setState(props.staff.sort((a,b) => ((a.salaryScale * 3000000 + a.overTime * 200000) > (b.salaryScale * 3000000 + b.overTime * 200000)) ? 1 : -1 ))
-     console.log(state);
-   }
-  let staff = state.map((staff) => {
-    const totalsalary = staff.salaryScale * 3000000 + staff.overTime * 200000;
-    return (
-      <div className="col-lg-4 col-md-6 col-12" key={staff.id}>
-        <RenderSalary staff={staff} totalsalary={totalsalary}  />
-      </div>
-    );
-  });
+    const [q,setQ] = useState(true)
+    let sortedSalary = [...props.staff];
+    sortedSalary.sort((a,b) => ((a.salaryScale * 3000000 + a.overTime * 200000) > (b.salaryScale * 3000000 + b.overTime * 200000)) ? 1 : -1 )
+    const sortSolary=() => {
+      setQ(!q)
+      if(q)
+      {
+        setState(sortedSalary)
+      }
+      else{
+        setState(props.staff)
+      }
+    }
+    const staff = state.map((staff) => {
+        const totalsalary = staff.salaryScale * 3000000 + staff.overTime * 200000;
+        return (
+          <div className="col-lg-4 col-md-6 col-12" key={staff.id}>
+            <RenderSalary staff={staff} totalsalary={totalsalary}  />
+          </div>
+        );
+      });
   return (
     <div className="container ">
       <h5 className="mt-3 d-flex text-danger">
         {" "}
-        Nhân Viên
-        <p className="text-secondary">/ Bảng Lương</p>{" "}
+        <p className="text-secondary">Bảng Lương</p>{" "}
       </h5>
-      <Button color="primary" outline>
+      {/* <Button color="primary" outline>
         Sắp xếp theo tên
-      </Button>{" "}
+      </Button>{" "} */}
       <Button color="info" outline onClick={sortSolary} > 
         Sắp xếp theo Lương
       </Button>

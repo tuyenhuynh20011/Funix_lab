@@ -55,10 +55,13 @@ class Main extends Component {
     }
     return (
       <>
+
         <Header />  
+        <div className="container ">
           <Switch>
             <Route path="/home" component={HomePage} />
             <Redirect path="/home" />
+            <Route exact path="/" component={HomePage}/>
             <Route
               exact
               path="/staff"
@@ -84,6 +87,7 @@ class Main extends Component {
             <Route path="/staff/:id" render={StaffId} />
             <Route path="/search/:value" render={SearchVal} />
           </Switch>
+          </div>
         <Footer />
       </>
     );
