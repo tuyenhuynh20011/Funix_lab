@@ -1,9 +1,14 @@
 import React from "react";
-import { Navbar, NavbarBrand } from "reactstrap";
+import { Navbar, NavbarBrand, Button} from "reactstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import  AddStaffs  from "./addStaffs";
 function Header() {
   const [q, setQ] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCLick=() => {
+    setIsOpen(!isOpen)
+  }
   return (
     <Navbar dark color="primary" expand="md">
       <div className="container">
@@ -32,13 +37,18 @@ function Header() {
               id="search-button"
               type="button"
               className="btn btn-primary"
-              // onClick={handleSearch}
             >
               <i className="fa fa-search fa-lg"></i>
             </button>
           </Link>
+            <Button  color="danger" onClick={handleCLick}>
+            Thêm Nhân Viên {' '}
+            <span></span>
+            </Button>
         </div>
+
       </div>
+    {isOpen && <AddStaffs/>}
     </Navbar>
   );
 }

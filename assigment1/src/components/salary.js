@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button } from "reactstrap";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 const RenderSalary = ({ staff,totalsalary }) => {
 
   return (
@@ -21,6 +21,7 @@ const RenderSalary = ({ staff,totalsalary }) => {
 function Salary(props) {
     const [state,setState] = useState(props.staff);
     const [q,setQ] = useState(true)
+    const [btn,setbtn] = useState(' Sắp xếp theo Lương')
     let sortedSalary = [...props.staff];
     sortedSalary.sort((a,b) => ((a.salaryScale * 3000000 + a.overTime * 200000) > (b.salaryScale * 3000000 + b.overTime * 200000)) ? 1 : -1 )
     const sortSolary=() => {
@@ -28,9 +29,11 @@ function Salary(props) {
       if(q)
       {
         setState(sortedSalary)
+        setbtn('sắp xếp theo tên')
       }
       else{
         setState(props.staff)
+        setbtn('sắp xếp theo lương')
       }
     }
     const staff = state.map((staff) => {
@@ -51,7 +54,7 @@ function Salary(props) {
         Sắp xếp theo tên
       </Button>{" "} */}
       <Button color="info" outline onClick={sortSolary} > 
-        Sắp xếp theo Lương
+        {btn}
       </Button>
       <div className="row mt-3">{staff}</div>
     </div>
