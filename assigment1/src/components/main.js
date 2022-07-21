@@ -10,14 +10,18 @@ import StaffDetail from "./staffDetail";
 import Footer from "./footer";
 import Search from "./search";
 import { connect } from "react-redux";
-import {FetchApi} from '../redux/actionCreate'
-
+import {FetchApi,CreateStaff} from '../redux/actionCreate'
 const mapStateToProps = (state) => {
   return {
     staffs: state.staffs,
     department: state.department,
+    newstaff: state.newstaff,
   };
 };
+const mapDispatchToProps = (dispatch) => ({
+  FetchApi: () => dispatch(FetchApi()),
+  CreateStaff:(newstaff)=> dispatch(CreateStaff(newstaff))
+  })
 class Main extends Component {
   // Nen khai bao dau vao du lieu va state o ham Main , khong nen dung o ham staff hay ham depmarnt
   // truyen state tu component cha sang component con
@@ -25,16 +29,14 @@ class Main extends Component {
     super(props);
     this.state={};
   }
-  componentDidMount()
-  {
-    FetchApi();
+  componentDidMount(){
+    this.props.FetchApi();
   }
   render() {
     const HomePage = () => {
       return <Home />;
     };
-
-    // Viet cai ham StaffDetail
+    // Viet cai ham StaffDetail 
     // Muc dich cai nay la truyen cai chi tiet nhan vien co chinh xác id vao ham  StaffDetail
     const StaffId = ({ match }) => {
       // console.log(match);
@@ -46,10 +48,7 @@ class Main extends Component {
         />
       );
     };
-
-
     const SearchVal = ({ match }) => {
-      console.log(match);
       return (
         <Search
           staff={this.props.staffs.filter((item) =>
@@ -60,7 +59,7 @@ class Main extends Component {
     };
     return (
       <>
-        <Header />
+        <Header createStaff={this.props.CreateStaff} fetchApi={this.props.FetchApi} />
         <div className="container ">
           <Switch>
             <Route path="/home" component={HomePage} />
@@ -91,4 +90,4 @@ class Main extends Component {
   }
 }
 
-export default  withRouter(connect(mapStateToProps)(Main));
+export default  withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

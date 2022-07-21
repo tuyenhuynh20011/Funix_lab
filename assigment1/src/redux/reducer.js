@@ -2,11 +2,7 @@ import { STAFFS, DEPARTMENTS } from "../shared/Staff";
 import { useEffect } from "react";
 
 export const initialState = {
-  staffs:[
-    {
-      name:123
-    }
-  ],
+  staffs: [],
   department: [],
 };
 
@@ -15,7 +11,7 @@ const rootReducer = (state = initialState, action) => {
     case "SET":
       return {
         ...state,
-        staffs:action.payload,
+        staffs: action.payload,
       };
     default:
       return state;

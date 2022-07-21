@@ -2,12 +2,13 @@ import React from "react";
 import { Navbar, NavbarBrand, Button} from "reactstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import  AddStaffs  from "./addStaffs";
-function Header() {
+import  AddStaffs  from "./addStaffsForm";
+function Header({createStaff,fetchApi}) {
   const [q, setQ] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const handleCLick=() => {
     setIsOpen(!isOpen)
+ 
   }
   return (
     <Navbar dark color="primary" expand="md">
@@ -48,7 +49,7 @@ function Header() {
         </div>
 
       </div>
-    {isOpen && <AddStaffs/>}
+    {isOpen && <AddStaffs createStaff={createStaff} fetchApi={fetchApi}/>}
     </Navbar>
   );
 }

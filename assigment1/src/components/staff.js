@@ -21,14 +21,8 @@ function RenderStaffList({ staff, onClick }) {
   );
 }
 function Staff() {
-  const stafflistvalue=useSelector(state=> state)
-  console.log(stafflistvalue);
-  useEffect(() => {
-  
-  }, []);
-
-  
-  const staffList = stafflistvalue.staffs.map((staff) => {
+  const stafflistvalue=useSelector(state=> state.AddStaffs  )
+  const staffList = stafflistvalue.newstaff.map((staff) => {
     return (
       <div className="col-lg-2 col-md-4 col-6" key={staff.id}>
         <RenderStaffList staff={staff} onClick={stafflistvalue.onClick} />
