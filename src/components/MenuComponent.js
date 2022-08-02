@@ -8,7 +8,7 @@ import { Transition } from 'react-transition-group';
  function RenderMenuItem ({staffs,isLoading,errMess}) {
     if (isLoading) {
         return(
-                <Loading />
+            <Loading />
         );
     }
     else if (errMess) {
@@ -25,14 +25,13 @@ import { Transition } from 'react-transition-group';
             }}>
             <Card style ={{border:'0px'}}>
                 <Link to={`/menu/${staffs.id}`} style ={{margin:'0px'}} >
-                    <CardImg width="100%" src={staffs.image} alt={staffs.name} />
+                    <CardImg width="100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU" alt={staffs.name} />
                     <CardTitle style = {{color:"black", textAlign: "center"}}>{staffs.name}</CardTitle>
                 </Link>
             </Card>
             </FadeTransform>
         );      
 }
-
 class Menu extends Component{
     constructor(props) {
         super(props);
@@ -51,16 +50,12 @@ class Menu extends Component{
         event.preventDefault();
         // console.log('STATE NAME ' + this.state.name);
         // console.log('PROPS STAFF ' + JSON.stringify(this.props.staffs));
-        //Check if Staff Name is undefined or not.
-
-        
+        //Check if Staff Name is undefined or not.        
             const result = this.props.staffs.filter(s => s.name?.toLowerCase().match(this.state?.name.toLowerCase()));
             this.setState({
                 staffs:result,
                 name:this.name.value,
             });
-    
-    
     }
     handleInputChange(event){
         this.setState({
@@ -77,9 +72,7 @@ class Menu extends Component{
         this.setState({
             istransition: true,
         })
-
     }
-    
         render(){
             const chuanhap = (val) => val&&(val.length>=0);
             const isNumber = (val) => !isNaN(Number(val));
@@ -95,13 +88,8 @@ class Menu extends Component{
                     </div>
                 );
             });
-            
-
-
             return(
-                <Transition in = {this.state.istransition} timeout={700}>
-
-               
+                <Transition in = {this.state.istransition} timeout={700}> 
                 <div className="container">
                     <div className="row">
                             <div className="col-9 col-md-3 col-lg-2" style={{marginTop:"10px"}} >
@@ -141,8 +129,7 @@ class Menu extends Component{
                                 <Label htmlFor="username" md={4}>Tên</Label>
                                 <Col md={8}>
                                     <Control.text model=".username" id="username" name="username"
-                                        placeholder="Name"
-                                        defaultValue ='Nhân viên mới'
+                                        placeholder="Tên Nhân Viên"
                                         className="form-control"
                                         validators={{
                                             chuanhap,
@@ -241,7 +228,6 @@ class Menu extends Component{
                                             chuanhap: 'Chưa nhập ',
                                             isNumber: 'Phải là số',
                                             soDuong: 'Phải >=0'
-
                                         }}
                                      />
                                 </Col>
@@ -266,7 +252,6 @@ class Menu extends Component{
                                             chuanhap: 'Chưa nhập ',
                                             isNumber: 'Phải là số',
                                             soDuong: 'Phải >=0'
-
                                         }}
                                     />
                                 </Col>
@@ -286,7 +271,6 @@ class Menu extends Component{
             );
     }
 }
-
 export default Menu;
 
   

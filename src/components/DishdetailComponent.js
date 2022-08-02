@@ -6,11 +6,6 @@ import dateFormat from "dateformat";
 import { Loading } from './LoadingComponent';
 
 
-   
-  
-        //this.props.postStaffs(values.username,values.doB,values.startDate,values.department,values.salaryScale,values.overTime,values.annualLeave);
-
-
   
 
 class StaffDetail extends Component{
@@ -30,9 +25,7 @@ class StaffDetail extends Component{
               });
         }
         delStaff(){
-            //const history =  useHistory();
             this.props.deleteStaff(this.props.staff?.id);   
-           // history.push('/menu');
         }
         handleSubmit(values) {
                 const Staff ={
@@ -90,9 +83,9 @@ class StaffDetail extends Component{
                     </div>                
                 </div> 
         <div className="row">
-            <div  className="col-12 col-md-4 col-lg-3">
+            <div  className="col-12 col-md-4 col-lg-3"> 
                 <Card style ={{border:'0px'}}>
-                    <CardImg top src={this.props.staff?.image} alt={this.props.staff?.name} />
+                    <CardImg top src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyGNr2qL63Sfugk2Z1-KBEwMGOfycBribew&usqp=CAU" alt={this.props.staff?.name} />
                 </Card>
             </div>
             <div  className="col-12 col-md-8 col-lg-9">
@@ -125,7 +118,7 @@ class StaffDetail extends Component{
                                 <Label htmlFor="username" md={4}>Tên</Label>
                                 <Col md={8}>
                                     <Control.text model=".username" id="username" name="username"
-                                        placeholder="Name"
+                                        placeholder="Thêm Nhân Ziên"
                                         defaultValue ={this.props.staff?.name}
                                         className="form-control"
                                         validators={{
